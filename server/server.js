@@ -2,18 +2,20 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const MONGOURL = 'mongodb+srv://yogiii:yogeshb26@cluster0-yopel.mongodb.net/test?retryWrites=true&w=majority'
+
 const app = express();
 
 mongoose.connect(MONGOURL)
 .then(()=> console.log("DB Connected"))
 .catch(error => console.log(error));
 
-const { User } = require('./models/user')
+const { User } = require('./Model/user')
 
 app.use(bodyParser.json());
 
-app.post('api/user/signup', (req, res) => {
-    const user = new.User({
+app.post ('api/user/signup', (req, res) => {
+    const user = new User({
         number: req.body.number,
         password: req.body.password
     }).save((err, response) => {
@@ -37,8 +39,6 @@ app.post ('/api/user/signin', (req, res) => {
     })
 });
 
-const port = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4500
 
-app.listen(port,() => {
-    console.log('server running on ${port}');
-});
+app.listen(PORT,() => console.info(`server running on ${PORT}`))
