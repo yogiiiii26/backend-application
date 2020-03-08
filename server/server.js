@@ -2,8 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const MONGOURL = 'mongodb+srv://yogiii:qwerty123@cluster0-yopel.mongodb.net/test?retryWrites=true&w=majority'
-
 const app = express();
 
 mongoose.connect(MONGOURL)
