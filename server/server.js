@@ -14,7 +14,7 @@ const { User } = require('./Model/user')
 
 app.use(bodyParser.json());
 
-app.post ('api/user/signup', (req, res) => {
+app.post ('/api/user/signup', (req, res) => {
     const user = new User({
         number: req.body.number,
         password: req.body.password
