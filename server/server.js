@@ -18,19 +18,17 @@ app.post ('/api/user/signup', (req, res) => {
     const user = new User({
         number: req.body.number,
         password: req.body.password
-    }).save((err, response) => {
-        if(err) res.status(400).send(err)
+    }).save((error, response) => {
+        if(error) res.status(400).send(error)
         res.status(200).send(response)
     })
 })
 
 app.post ('/api/user/signin', (req, res) => {
-
-    User.findOne({'number': req.body.number}, (err, user) =>{
+    User.findOne({'number': req.body.number}, (error, user) =>{
         if(!user) res.json({message: 'Login failed, user not found'})
-
-        user.comparePassword(req.body.password, (err, isMatch) => {
-            if(err) throw err;
+        user.comparePassword(req.body.password, (error, isMatch) => {
+            if(error) throw error;
             if(!isMatch) return res.status(400).json({
                 message: 'Wrong Password'
             });
@@ -39,6 +37,6 @@ app.post ('/api/user/signin', (req, res) => {
     })
 });
 
-const PORT = process.env.PORT || 4500
+const PORT = process.env.PORT || 5600
 
 app.listen(PORT,() => console.info(`server running on ${PORT}`))
